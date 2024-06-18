@@ -1,25 +1,28 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CommandDialogVirtual } from "./command-virtualized";
 import { randomUserList } from "./users";
 
+interface RandomUser {
+  name: { first: string; last: string };
+  login: { uuid: string };
+  picture: { medium: string };
+}
+
 interface User {
-  name: any;
-  login: any;
-  picture: any;
   value: string;
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   img_url: string;
 }
 
 export default function Home() {
-  // use a state if you want to control the value of the input, otherwise ignore the value prop
   const [value, setValue] = useState("");
-  const [users, setUsers] = useState([] as User[]);
+  const [users, setUsers] = useState<User[]>([]);
+
   useEffect(() => {
-    const formattedUsers = randomUserList.results.map((user: User) => ({
+    const formattedUsers = randomUserList.results.map((user: RandomUser) => ({
       value: `${user.name.first} ${user.name.last}`,
       id: user.login.uuid,
       firstName: user.name.first,
@@ -47,7 +50,6 @@ export default function Home() {
           onValueChange={setValue}
         />
       </div>
-      {/* A footer here with a github icon and a link to the repo, with my name (Hadid Garcia) */}
       <footer className="mt-auto w-full max-w-md flex items-center justify-center gap-6">
         <a
           href="https://github.com/hakidoto/shadcn-ui-virtualized-command"

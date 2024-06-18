@@ -26,11 +26,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const ITEM_SIZE = 70; // Adjust this based on your design
 
 type Option = {
-  name: any;
-  login: any;
-  picture: any;
   value: string;
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   img_url: string;
